@@ -1,0 +1,51 @@
+Tabela Pokemons (DIEGO)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - Nome VARCHAR(50) NOT NULL
+    - Tipo INTEGER NOT NULL
+    - Imagem VARCHAR(100) NOT NULL
+
+Tabela Itens (DOUGLAS)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - Nome VARCHAR(50)
+    - Descricao VARCHAR(100)
+    - Preço DOUBLE NOT NULL
+    - Imagem  VARCHAR(100)
+
+Tabela Itens Jogador (ITENS)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - IDUsuario INTEGER NOT NULL
+    - IDItem INTEGER NOT NULL
+    - Quantidade INTEGER
+    
+Tabela Pokedex (RODRIGO)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - IDPokemon INTEGER NOT NULL
+    - IDUsuario INTEGER NOT NULL
+    - Visto INTEGER
+
+Tabela Pokemons Jogador (DIEGO)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - IDPokemon INTEGER NOT NULL
+    - IDUsuario INTEGER NOT NULL
+    - HP INTEGER NULL
+    - Level INTEGER NULL
+    - Ataque INTEGER NULL
+    - Defesa INTEGER NULL
+    - Velocidade INTEGER NULL
+    - XP DOUBLE NOT NULL
+    - Critico INTEGER NULL
+    - Vida INTEGER NULL
+    - Data Captura DATE NOT NULL
+
+Tabela Jogador (RODRIGO)
+    - ID INTEGER PRIMARY KEY AUTOINCREMENT
+    - IDPokemonJogador INTEGER NOT NULL
+    - Nome VARCHAR(50) NOT NULL
+    - Apelido VARCHAR(20) NOT NULL
+    - Email VARCHAR(100) NOT NULL
+    - Senha VARCHAR(20) NOT NULL
+    - Carisma INTEGER
+    - Inteligencia INTEGER 
+    - Sorte INTEGER 
+    - Dinheiro DOUBLE 
+    - Clã VARCHAR(10) 
