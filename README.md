@@ -1,3 +1,5 @@
+[![API](https://img.shields.io/badge/API-23%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=23) [![Versão](https://img.shields.io/badge/Versão-1.0-yellow.svg)]()
+
 # PokemonIF
 
 # Estrutura das tabelas
