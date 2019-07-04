@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,15 @@ import com.ifsul.pokemon.models.Pokedex;
 import com.ifsul.pokemon.models.Pokemon;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PokedexListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Pokedex> pokedexList;
+    private ArrayList<Pokedex> pokedexList;
 
-    public PokedexListAdapter(Context c, List<Pokedex> l) {
+    public PokedexListAdapter(Context c, ArrayList<Pokedex> l) {
         this.context = c;
         this.pokedexList = l;
     }
@@ -61,7 +63,8 @@ public class PokedexListAdapter extends BaseAdapter {
             CardView cvPokemon = v.findViewById(R.id.cvPokemon);
 
             tvNome.setText(pokemon.getNome());
-            tvID.setText(pokedex.getId());
+            tvID.setText(String.format("#%s", pokemon.getId()));
+            Log.e("ASD", pokemon.getImagem());
             Picasso.get().load(pokemon.getImagem()).into(ivPokemon);
             cvPokemon.setCardBackgroundColor(corTipoPokemon(pokemon.getTipo()));
 

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GridView gvPokedex;
     private PokedexListAdapter adapter;
-    private List<Pokedex> pokedexList;
+    private ArrayList<Pokedex> pokedexList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +32,23 @@ public class MainActivity extends AppCompatActivity {
 
         DatabasePokemon db = new DatabasePokemon(getApplicationContext(), DB_NAME, DB_VERSION);
 
-        try {
-            db.inserir_na_pokedex(1, 0, 2);
-            db.inserir_na_pokedex(1, 1, 2);
-            db.inserir_na_pokedex(1, 2, 2);
-        } catch (Exception e) {
-            Log.d("PKDB", e.getMessage());
-        }
+        // TODO: DESCOMENTAR E RODAR UMA VEZ PARA ALIMENTAR O DB
+//        try {
+//            db.inserir_pokemon("Groudon", 0, "https://img.pokemondb.net/artwork/vector/large/groudon.png");
+//            db.inserir_pokemon("Rayquaza", 1, "https://img.pokemondb.net/artwork/vector/large/rayquaza.png");
+//            db.inserir_pokemon("Kyogre", 2, "https://pokemondb.net/pokebase/qa-plugin/https-img-proxy/image.php?key=b5914bd0ba1d0c7f&url=http%3A%2F%2Fpokemondungeon.net%2Fgallery%2Falbums%2FDream%2520World%2FPokemon%2Fnormal_382Kyogre_Dream.png");
+//            db.inserir_na_pokedex(1, 0, 2);
+//            db.inserir_na_pokedex(1, 1, 2);
+//            db.inserir_na_pokedex(1, 2, 2);
+//        } catch (Exception e) {
+//            Log.e("PKDB", e.getMessage());
+//        }
 
         gvPokedex = findViewById(R.id.gvPokedex);
         pokedexList = new ArrayList<>();
-
-        adapter = new PokedexListAdapter(MainActivity.this, pokedexList);
-
-        gvPokedex.setAdapter(adapter);
-
         pokedexList = db.listar_pokedex(1);
+        adapter = new PokedexListAdapter(this, pokedexList);
+        gvPokedex.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
     }
