@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!-- Cores Tipos Pokemons -->
+    <color name="colorPlanta">#009688</color>
+    <color name="colorFogo">#f44336</color>
+    <color name="colorAgua">#00bcd4</color>
+    <color name="colorEletrico">#ffc107</color>
+    <color name="colorTerrestre">#795548</color>
+    <color name="colorNormal">#e0e0e0</color>
+    <color name="colorPedra">#9e9e9e</color>
+    <color name="colorVoador">#03a9f4</color>
+    <color name="colorVenenoso">#4527a0</color>
+    <color name="colorInseto">#8bc34a</color>
+    <color name="colorNoturno">#263238</color>
+    <color name="colorFantasma">#3f51b5</color>
+    <color name="colorPsiquico">#ffeb3b</color>
+    <color name="colorDragao">#ff9800</color>
+    <color name="colorMetalico">#b0bec5</color>
+    <color name="colorGelo">#64b5f6</color>
+    <color name="colorLutador">#9e9e9e</color>
+    <color name="colorFada">#e91e63</color>
+
+    <color name="colorBrancoTransparente">#94FFFFFF</color>
+
+</resources>
