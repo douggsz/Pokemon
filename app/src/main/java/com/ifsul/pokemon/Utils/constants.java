@@ -23,17 +23,29 @@ public class constants {
     private static final String LUTADOR = "Lutado"; // 16
     private static final String FADA = "Fada"; // 17
 
-    public static final String DB_NAME = "dbPokemon";
+    public static final String DB_NAME = "db_pokemon";
     public static final int DB_VERSION = 1;
 
     public static final String POKEDEX = "pokedex";
     public static final String POKEMON = "pokemon";
-    public static final String ID = "id";
-    public static final String ID_POKEMON = "idPokemon";
-    public static final String ID_JOGADOR = "idJogador";
-    public static final String QTD_VISTO = "qtdVisto";
+    public static final String ID = "_id";
+    public static final String ID_POKEMON = "id_pokemon";
+    public static final String ID_JOGADOR = "id_jogador";
+    public static final String QTD_VISTO = "qtd_visto";
     public static final String NOME = "nome";
     public static final String TIPO = "tipo";
     public static final String IMAGEM = "imagem";
+
+    public static final String JOGADOR = "jogador";
+    public static final String ID_POKEMON_JOGADOR = "id_pokemon_jogador";
+    public static final String APELIDO = "apelido";
+    public static final String EMAIL = "email";
+    public static final String SENHA = "senha";
+    public static final String CARISMA = "carisma";
+    public static final String SORTE = "sorte";
+    public static final String INTELIGENCIA = "integligencia";
+    public static final String DINHEIRO = "dinheiro";
+    public static final String CLA = "cla";
+
 
 }
