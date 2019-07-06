@@ -63,7 +63,7 @@ public class PokedexListAdapter extends BaseAdapter {
             CardView cvPokemon = v.findViewById(R.id.cvPokemon);
 
             tvNome.setText(pokemon.getNome());
-            tvID.setText(String.format("#%s", pokemon.getId()));
+            tvID.setText("#0" + pokedex.getId());
             Log.e("ASD", pokemon.getImagem());
             Picasso.get().load(pokemon.getImagem()).into(ivPokemon);
             cvPokemon.setCardBackgroundColor(corTipoPokemon(pokemon.getTipo()));

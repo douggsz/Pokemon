@@ -78,8 +78,8 @@ public class DatabasePokemon extends SQLiteOpenHelper {
     }
 
     public ArrayList<Pokedex> listar_pokedex(int id_jogador) {
-        Pokedex pokedex = new Pokedex();
-        Pokemon pokemon = new Pokemon();
+        Pokedex pokedex;
+        Pokemon pokemon;
         ArrayList<Pokedex> resultPokedex = new ArrayList<>();
 
         Cursor cursorPokedex = getWritableDatabase().query(POKEDEX,
@@ -87,11 +87,12 @@ public class DatabasePokemon extends SQLiteOpenHelper {
 
         cursorPokedex.moveToFirst();
         while (cursorPokedex.moveToNext()) {
-
+            pokedex = new Pokedex();
             Cursor cursorPokemon = getWritableDatabase().query(POKEMON,
                     new String[]{ID, NOME, TIPO, IMAGEM}, String.format("%s = %s", ID, cursorPokedex.getInt(1)), null, null, null, null);
-
+            pokemon = new Pokemon();
             if (cursorPokemon.getCount() > 0) {
+
                 cursorPokemon.moveToFirst();
                 pokemon.setId(cursorPokemon.getInt(0));
                 pokemon.setNome(cursorPokemon.getString(1));
