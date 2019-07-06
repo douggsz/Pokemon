@@ -7,35 +7,72 @@
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-
     <GridView
         android:id="@+id/gvPokedex"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
         android:fastScrollEnabled="true"
+        android:gravity="center"
         android:horizontalSpacing="5dp"
         android:numColumns="2"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fbPokedexFiltro"
+    <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/filtro" />
+        app:menu_animationDelayPerItem="55"
+        app:menu_buttonSpacing="0dp"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="@color/colorAccent"
+        app:menu_colorRipple="#99d4d4d4"
+        app:menu_fab_label="Filtro Pokedex"
+        app:menu_icon="@drawable/pokebola_white"
+        app:menu_labels_colorNormal="#333"
+        app:menu_labels_colorPressed="#444"
+        app:menu_labels_colorRipple="#66efecec"
+        app:menu_labels_cornerRadius="3dp"
+        app:menu_labels_ellipsize="none"
+        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        app:menu_labels_margin="0dp"
+        app:menu_labels_maxLines="1"
+        app:menu_labels_padding="8dp"
+        app:menu_labels_position="left"
+        app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        app:menu_labels_showShadow="true"
+        app:menu_labels_singleLine="false"
+        app:menu_labels_textColor="#f2f1f1"
+        app:menu_labels_textSize="15sp"
+        app:menu_openDirection="up"
+        app:menu_shadowColor="#66aff198"
+        app:menu_shadowRadius="4dp"
+        app:menu_shadowXOffset="1dp"
+        app:menu_shadowYOffset="4dp"
+        app:menu_showShadow="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/name"
+            app:fabSize="mini"
+            app:fab_label="Filtrar por Nome" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/type"
+            app:fabSize="mini"
+            app:fab_label="Filtrar por Tipo" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 
 </android.support.constraint.ConstraintLayout>
