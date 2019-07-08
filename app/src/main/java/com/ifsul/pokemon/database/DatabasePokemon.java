@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ifsul.pokemon.models.Jogador;
@@ -83,32 +84,34 @@ public class DatabasePokemon extends SQLiteOpenHelper {
         ArrayList<Pokedex> resultPokedex = new ArrayList<>();
 
         Cursor cursorPokedex = getWritableDatabase().query(POKEDEX,
-                new String[]{ID, ID_POKEMON, ID_JOGADOR, QTD_VISTO}, String.format("%s = %s", ID_JOGADOR, id_jogador), null, null, null, null);
+                new String[]{ID, ID_POKEMON, ID_JOGADOR, QTD_VISTO}, String.format("%s = %s", ID_JOGADOR, id_jogador), null, null, null, ID);
 
         cursorPokedex.moveToFirst();
-        while (cursorPokedex.moveToNext()) {
-            pokedex = new Pokedex();
-            Cursor cursorPokemon = getWritableDatabase().query(POKEMON,
-                    new String[]{ID, NOME, TIPO, IMAGEM}, String.format("%s = %s", ID, cursorPokedex.getInt(1)), null, null, null, null);
-            pokemon = new Pokemon();
-            if (cursorPokemon.getCount() > 0) {
+        if (cursorPokedex.getCount() > 0) {
+            do {
+                pokedex = new Pokedex();
+                Cursor cursorPokemon = getWritableDatabase().query(POKEMON,
+                        new String[]{ID, NOME, TIPO, IMAGEM}, String.format("%s = %s", ID, cursorPokedex.getInt(1)), null, null, null, null);
+                pokemon = new Pokemon();
+                if (cursorPokemon.getCount() > 0) {
 
-                cursorPokemon.moveToFirst();
-                pokemon.setId(cursorPokemon.getInt(0));
-                pokemon.setNome(cursorPokemon.getString(1));
-                pokemon.setTipo(cursorPokemon.getInt(2));
-                pokemon.setImagem(cursorPokemon.getString(3));
-            }
+                    cursorPokemon.moveToFirst();
+                    pokemon.setId(cursorPokemon.getInt(0));
+                    pokemon.setNome(cursorPokemon.getString(1));
+                    pokemon.setTipo(cursorPokemon.getInt(2));
+                    pokemon.setImagem(cursorPokemon.getString(3));
+                }
 
-            cursorPokemon.close();
+                cursorPokemon.close();
 
-            pokedex.setId(cursorPokedex.getInt(0));
-            pokedex.setPokemon(pokemon);
-            pokedex.setIdJogador(cursorPokedex.getInt(2));
-            pokedex.setQtdVisto(cursorPokedex.getInt(3));
+                pokedex.setId(cursorPokedex.getInt(0));
+                pokedex.setPokemon(pokemon);
+                pokedex.setIdJogador(cursorPokedex.getInt(2));
+                pokedex.setQtdVisto(cursorPokedex.getInt(3));
 
-            resultPokedex.add(pokedex);
+                resultPokedex.add(pokedex);
 
+            } while (cursorPokedex.moveToNext());
         }
 
         cursorPokedex.close();
