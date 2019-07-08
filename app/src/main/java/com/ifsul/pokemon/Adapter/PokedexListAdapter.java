@@ -10,15 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ifsul.pokemon.R;
 import com.ifsul.pokemon.models.Pokedex;
 import com.ifsul.pokemon.models.Pokemon;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class PokedexListAdapter extends BaseAdapter {
 
@@ -61,10 +65,23 @@ public class PokedexListAdapter extends BaseAdapter {
             TextView tvID = v.findViewById(R.id.tvID);
             ImageView ivPokemon = v.findViewById(R.id.ivPokemon);
             CardView cvPokemon = v.findViewById(R.id.cvPokemon);
+            final ProgressBar pbPokemon = v.findViewById(R.id.pbPokemon);
 
             tvNome.setText(pokemon.getNome());
             tvID.setText("#0" + pokedex.getId());
-            Picasso.get().load(pokemon.getImagem()).into(ivPokemon);
+            Picasso.with(v.getContext())
+                    .load(pokemon.getImagem())
+                    .into(ivPokemon, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            pbPokemon.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
             cvPokemon.setCardBackgroundColor(corTipoPokemon(pokemon.getTipo()));
 
         } else {

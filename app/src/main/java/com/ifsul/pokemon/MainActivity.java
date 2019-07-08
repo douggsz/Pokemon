@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: DESCOMENTAR E RODAR UMA VEZ PARA ALIMENTAR O DB
         try {
-            //inserirPokemon(db);
+            inserirPokemon(db);
             inserirPokedex(db);
         } catch (Exception e) {
             Log.e("PKDB", e.getMessage());
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
         db.inserir_pokemon(getApplicationContext(),"Groudon", 0, "https://img.pokemondb.net/artwork/vector/large/groudon.png");
         db.inserir_pokemon(getApplicationContext(),"Rayquaza", 1, "https://img.pokemondb.net/artwork/vector/large/rayquaza.png");
         db.inserir_pokemon(getApplicationContext(),"Kyogre", 2, "https://pokemondb.net/pokebase/qa-plugin/https-img-proxy/image.php?key=b5914bd0ba1d0c7f&url=http%3A%2F%2Fpokemondungeon.net%2Fgallery%2Falbums%2FDream%2520World%2FPokemon%2Fnormal_382Kyogre_Dream.png");
-        db.inserir_pokemon(getApplicationContext(), "Pikachu", 3, "http://www.pngmart.com/files/2/Pikachu-PNG-Photos.png");
+        db.inserir_pokemon(getApplicationContext(), "Pikachu", 3, "https://i.imgur.com/Oo0OFrz.png");
         db.inserir_pokemon(getApplicationContext(), "Sandslash", 4, "https://i2.wp.com/falamedeiros.com.br/wp-content/uploads/2017/06/pokemon-go-quais-vantagens-e-desvantagens-tipo-terrestre.png");
         db.inserir_pokemon(getApplicationContext(), "Clefable", 5, "https://vignette.wikia.nocookie.net/victoryroad/images/2/27/FLArt_036.png/revision/latest?cb=20110609125054");
         db.inserir_pokemon(getApplicationContext(), "Graveler",6 , "https://cdn.bulbagarden.net/upload/thumb/7/75/075Graveler.png/250px-075Graveler.png");
-        db.inserir_pokemon(getApplicationContext(), "Doduo", 7, "http://3.bp.blogspot.com/_hfj1R8wnDyg/SkeQ5L79QqI/AAAAAAAAAQY/cxf6qQy5R5U/s320/Farfetch%27d.png");
+        db.inserir_pokemon(getApplicationContext(), "Doduo", 7, "https://i.imgur.com/rCMOqZD.png");
         db.inserir_pokemon(getApplicationContext(), "Muk", 8, "https://cdn.bulbagarden.net/upload/thumb/7/7c/089Muk.png/250px-089Muk.png");
-        db.inserir_pokemon(getApplicationContext(), "Scyther", 9, "http://2.bp.blogspot.com/_hfj1R8wnDyg/Skim14wg3ZI/AAAAAAAAAVo/Iod-KYOGJE8/s400/Scyther.png");
+        db.inserir_pokemon(getApplicationContext(), "Scyther", 9, "https://i.imgur.com/PRpGmvm.png");
         db.inserir_pokemon(getApplicationContext(), "Sneasel", 10, "https://www.geekno.com/pt/wp-content/uploads/sites/2/2018/10/sneasel-150x150.png");
         db.inserir_pokemon(getApplicationContext(), "Gengar", 11, "https://vignette.wikia.nocookie.net/pokepediabr/images/c/c6/094Gengar.png/revision/latest/scale-to-width-down/180?cb=20161215013207&path-prefix=pt-br");
         db.inserir_pokemon(getApplicationContext(), "Golduck", 12, "https://cdn.bulbagarden.net/upload/thumb/f/fe/055Golduck.png/1200px-055Golduck.png");

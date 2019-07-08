@@ -109,6 +109,8 @@ public class DatabasePokemon extends SQLiteOpenHelper {
                 pokedex.setIdJogador(cursorPokedex.getInt(2));
                 pokedex.setQtdVisto(cursorPokedex.getInt(3));
 
+                Log.d("ASD", String.format("IDPokedex: %s \n IDPokemon: %s \n Nome: %s", pokedex.getId(), pokemon.getId(), pokemon.getNome()));
+
                 resultPokedex.add(pokedex);
 
             } while (cursorPokedex.moveToNext());
