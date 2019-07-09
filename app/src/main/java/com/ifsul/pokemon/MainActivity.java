@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private int sorte = 0;
     private int id = 0;
 
+    // TODO: ACTIVITY POKEDEX
+    private ArrayList<Pokedex> pokedexList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pokedex);
 
         GridView gvPokedex = findViewById(R.id.gvPokedex);
-        ArrayList<Pokedex> pokedexList;
         pokedexList = new ArrayList<>();
         pokedexList = db.listar_pokedex(id);
         PokedexListAdapter adapter = new PokedexListAdapter(this, pokedexList);
@@ -102,22 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 activitySignIn();
                 showToast(getString(R.string.ate_a_proxima));
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
-//                dialog.setTitle(getString(R.string.deslogar))
-//                        .setMessage(getString(R.string.deslogar_msg))
-//                        .setPositiveButton(getString(R.string.confirmar), new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        })
-//                        .setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.dismiss();
-//                            }
-//                        })
-//                        .setIcon(android.R.drawable.ic_dialog_alert)
-//                        .show();
             }
         });
 
