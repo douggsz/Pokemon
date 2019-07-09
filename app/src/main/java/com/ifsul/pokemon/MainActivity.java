@@ -1,7 +1,11 @@
 package com.ifsul.pokemon;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -21,6 +25,8 @@ import java.util.regex.Pattern;
 
 import static com.ifsul.pokemon.Utils.constants.DB_NAME;
 import static com.ifsul.pokemon.Utils.constants.DB_VERSION;
+import static com.ifsul.pokemon.Utils.constants.PREF_NAME;
+import static com.ifsul.pokemon.Utils.constants.USUARIO_LOGADO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private int carisma = 0;
     private int inteligencia = 0;
     private int sorte = 0;
+    private int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +45,28 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DatabasePokemon(getApplicationContext(), DB_NAME, DB_VERSION);
 
-        activitySignIn();
+        verificaUsuarioLogado();
 
     }
 
-    private void activityPokedex() {
+    private void verificaUsuarioLogado() {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        id = prefs.getInt(USUARIO_LOGADO, 0);
+
+        if (id == 0) {
+            activitySignIn();
+        } else {
+            activityMenu();
+        }
+    }
+
+    private void activityPokedex(int id) {
         setContentView(R.layout.activity_pokedex);
 
         GridView gvPokedex = findViewById(R.id.gvPokedex);
         ArrayList<Pokedex> pokedexList;
         pokedexList = new ArrayList<>();
-        pokedexList = db.listar_pokedex(1);
+        pokedexList = db.listar_pokedex(id);
         PokedexListAdapter adapter = new PokedexListAdapter(this, pokedexList);
         gvPokedex.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -69,15 +87,65 @@ public class MainActivity extends AppCompatActivity {
     private void activityMenu() {
         setContentView(R.layout.activity_menu);
 
+        Button btnSair = findViewById(R.id.btnSair);
         CardView cvPokedex = findViewById(R.id.cvPokedex);
         CardView cvLoja = findViewById(R.id.cvLoja);
         CardView cvMapa = findViewById(R.id.cvMapa);
         CardView cvPokemons = findViewById(R.id.cvPokemons);
 
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                editor.putInt(USUARIO_LOGADO, 0);
+                editor.apply();
+                editor.commit();
+                activitySignIn();
+                showToast(getString(R.string.ate_a_proxima));
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
+//                dialog.setTitle(getString(R.string.deslogar))
+//                        .setMessage(getString(R.string.deslogar_msg))
+//                        .setPositiveButton(getString(R.string.confirmar), new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        })
+//                        .setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        })
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .show();
+            }
+        });
+
         cvPokedex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activityPokedex();
+                activityPokedex(id);
+            }
+        });
+
+        cvLoja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityLoja();
+            }
+        });
+
+        cvMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityMapa();
+            }
+        });
+
+        cvPokemons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityPokemons();
             }
         });
 
@@ -120,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             showToast(getString(R.string.email_senha_incorreto));
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         showToast(e.getMessage());
                     }
                 }

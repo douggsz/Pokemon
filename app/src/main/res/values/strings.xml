@@ -32,4 +32,10 @@
     <string name="escolha_carisma">Escolha a quantidade de Carisma</string>
     <string name="escolha_inteligencia">Escolha a quantidade de Inteligência</string>
     <string name="escolha_sorte">Escolha a quantidade de Sorte</string>
+    <string name="pokemon_if">Pokemon IF</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ate_a_proxima">Até a proxima!</string>
+    <string name="deslogar">Deslogar</string>
+    <string name="deslogar_msg">Deseja realmente deslogar de sua conta?</string>
+    <string name="confirmar">Confirmar</string>
 </resources>

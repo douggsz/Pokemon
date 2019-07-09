@@ -192,11 +192,10 @@ public class DatabasePokemon extends SQLiteOpenHelper {
                     values.put(INTELIGENCIA, inteligencia);
                     values.put(DINHEIRO, dinheiro);
                     values.put(CLA, cla);
-                    getWritableDatabase().insert(JOGADOR, null, values);
-                    //salvarLoginShared(context, id);
+                    long id = getWritableDatabase().insert(JOGADOR, null, values);
+                    salvarLoginShared(context, (int) id);
 
                     return 200;
-
                 }
 
             }
@@ -235,6 +234,7 @@ public class DatabasePokemon extends SQLiteOpenHelper {
         Cursor cursorJogador = getWritableDatabase().query(JOGADOR, new String[]{ID}, String.format("%s = '%s' AND %s = '%s'", EMAIL, email, SENHA, senha), null, null, null, null);
 
         if (cursorJogador.getCount() > 0) {
+            cursorJogador.moveToFirst();
             salvarLoginShared(context, cursorJogador.getInt(0));
             cursorJogador.close();
             return true;
