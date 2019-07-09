@@ -2,6 +2,7 @@ package com.ifsul.pokemon.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,6 +15,7 @@ import com.ifsul.pokemon.models.Pokemon;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.ifsul.pokemon.Utils.constants.APELIDO;
 import static com.ifsul.pokemon.Utils.constants.CARISMA;
 import static com.ifsul.pokemon.Utils.constants.CLA;
@@ -29,10 +31,12 @@ import static com.ifsul.pokemon.Utils.constants.JOGADOR;
 import static com.ifsul.pokemon.Utils.constants.NOME;
 import static com.ifsul.pokemon.Utils.constants.POKEDEX;
 import static com.ifsul.pokemon.Utils.constants.POKEMON;
+import static com.ifsul.pokemon.Utils.constants.PREF_NAME;
 import static com.ifsul.pokemon.Utils.constants.QTD_VISTO;
 import static com.ifsul.pokemon.Utils.constants.SENHA;
 import static com.ifsul.pokemon.Utils.constants.SORTE;
 import static com.ifsul.pokemon.Utils.constants.TIPO;
+import static com.ifsul.pokemon.Utils.constants.USUARIO_LOGADO;
 
 public class DatabasePokemon extends SQLiteOpenHelper {
 
@@ -161,23 +165,45 @@ public class DatabasePokemon extends SQLiteOpenHelper {
         }
     }
 
-    public boolean inserir_jogador(Context context, String nome, String apelido, String email, String senha, int carisma, int sorte, int inteligencia, double dinheiro, String cla) {
+    public int inserir_jogador(Context context, String nome, String apelido, String email, String senha, int carisma, int sorte, int inteligencia, double dinheiro, String cla) {
         try {
-            ContentValues values = new ContentValues();
-            values.put(NOME, nome);
-            values.put(APELIDO, apelido);
-            values.put(EMAIL, email);
-            values.put(SENHA, senha);
-            values.put(CARISMA, carisma);
-            values.put(SORTE, sorte);
-            values.put(INTELIGENCIA, inteligencia);
-            values.put(DINHEIRO, dinheiro);
-            values.put(CLA, cla);
-            getWritableDatabase().insert(JOGADOR, null, values);
-            return true;
+
+            Cursor cursorApelido = getWritableDatabase().query(JOGADOR, new String[]{APELIDO}, String.format("%s = '%s'", APELIDO, apelido), null, null, null, null);
+
+            if (cursorApelido.getCount() > 0) {
+                cursorApelido.close();
+                return 301;
+            } else {
+
+                Cursor cursorEmail = getWritableDatabase().query(JOGADOR, new String[]{EMAIL}, String.format("%s = '%s'", EMAIL, email), null, null, null, null);
+
+                if (cursorEmail.getCount() > 0) {
+                    cursorEmail.close();
+                    return 302;
+                } else {
+
+                    ContentValues values = new ContentValues();
+                    values.put(NOME, nome);
+                    values.put(APELIDO, apelido);
+                    values.put(EMAIL, email);
+                    values.put(SENHA, senha);
+                    values.put(CARISMA, carisma);
+                    values.put(SORTE, sorte);
+                    values.put(INTELIGENCIA, inteligencia);
+                    values.put(DINHEIRO, dinheiro);
+                    values.put(CLA, cla);
+                    getWritableDatabase().insert(JOGADOR, null, values);
+                    //salvarLoginShared(context, id);
+
+                    return 200;
+
+                }
+
+            }
+
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-            return false;
+            return 404;
         }
     }
 
@@ -205,20 +231,25 @@ public class DatabasePokemon extends SQLiteOpenHelper {
 
     }
 
-    public int login_jogador(String email, String senha) {
-        int id;
-        Cursor cursorJogador = getWritableDatabase().query(JOGADOR, new String[]{ID}, String.format("%s = %s AND %s = %s", EMAIL, email, SENHA, senha), null, null, null, null);
+    public boolean login_jogador(Context context, String email, String senha) {
+        Cursor cursorJogador = getWritableDatabase().query(JOGADOR, new String[]{ID}, String.format("%s = '%s' AND %s = '%s'", EMAIL, email, SENHA, senha), null, null, null, null);
 
         if (cursorJogador.getCount() > 0) {
-            id = cursorJogador.getInt(0);
+            salvarLoginShared(context, cursorJogador.getInt(0));
+            cursorJogador.close();
+            return true;
         } else {
-            id = 0;
+            cursorJogador.close();
+            return false;
         }
 
-        cursorJogador.close();
+    }
 
-        return id;
-
+    private void salvarLoginShared(Context context, int id) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USUARIO_LOGADO, id);
+        editor.apply();
+        editor.commit();
     }
 
 }

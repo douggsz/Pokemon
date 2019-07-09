@@ -25,6 +25,9 @@ public class constants {
 
     public static final String DB_NAME = "db_pokemon";
     public static final int DB_VERSION = 1;
+    public static final String PREF_NAME = "pokemon_preferences";
+    public static final String USUARIO_LOGADO = "usuario_logado";
+
 
     public static final String POKEDEX = "pokedex";
     public static final String POKEMON = "pokemon";
